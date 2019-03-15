@@ -40,14 +40,14 @@ class CustomerController extends Controller
             'address' => 'required',
             'total' => 'required|numeric',
         ]);
-        $customer = new Customer();
-        $customer->name = $request->name;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-        $customer->total = $request->total;
-        $customer->save();
-        return new CustomerResource($customer);
+//         $customer = new Customer();
+//         $customer->name = $request->name;
+//         $customer->email = $request->email;
+//         $customer->phone = $request->phone;
+//         $customer->address = $request->address;
+//         $customer->total = $request->total;
+//         $customer->save();
+        return new CustomerResource(Customer::create($request->all()));
     }
 
     /**
@@ -78,12 +78,13 @@ class CustomerController extends Controller
             'total' => 'required|numeric',
         ]);
         $customer = Customer::findOrfail($id);
-        $customer->name = $request->name;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
-        $customer->total = $request->total;
-        $customer->save();
+        $customer->update($request->all());
+//         $customer->name = $request->name;
+//         $customer->email = $request->email;
+//         $customer->phone = $request->phone;
+//         $customer->address = $request->address;
+//         $customer->total = $request->total;
+//         $customer->save();
         return new CustomerResource($customer);
     }
 
